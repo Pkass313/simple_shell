@@ -37,11 +37,11 @@ int is_delim(char p, char *delim)
  * Return: if p is alphabetic then 1, if not 0
  */
 
-int _isalpha(int c)
+int _isalpha(int p)
 
 {
 
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+        if ((c >= 'a' && p <= 'z') || (p >= 'A' && p <= 'Z'))
                 return (1);
         else
                 return (0);
