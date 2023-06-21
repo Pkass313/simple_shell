@@ -17,7 +17,7 @@ int interactive(info_t *info)
 * is_delim - checks if char is a delimeter
 * @p: Char to be checked
 * @delim: string of delimeter
-* Return: if true 1, if false 0
+* Return: 1 (Success) otherwise return 0
 */
 
 int is_delim(char p, char *delim)
@@ -32,13 +32,13 @@ int is_delim(char p, char *delim)
 /**
 * _isalpha - alphabetic char checker
 * @p: Char to insert
-* Return: if p is alphabetic then 1, if not 0
+* Return: if p is alphabetic return 1, otherwise return 0
 */
 
 int _isalpha(int p)
 
 {
-	if ((c >= 'a' && p <= 'z') || (p >= 'A' && p <= 'Z'))
+	if ((p >= 'a' && p <= 'z') || (p >= 'A' && p <= 'Z'))
 		return (1);
 	else
 		return (0);
@@ -54,29 +54,31 @@ int _isalpha(int p)
 int _atoi(char *q)
 
 {
-	int i, sign = 1, flag = 0, output;
+	int m, sign, f, output;
 
-	unsigned int result = 0;
+	unsigned int y = 0;
 
-	for (i = 0; q[i] != '\0' && flag != 2; i++)
+	sign = 1;
+	f = 0;
+	for (m = 0; q[m] != '\0' && flag != 2; m++)
 
 	{
-		if (q[i] == '-')
+		if (q[m] == '-')
 			sign *= -1;
-		if (q[i] >= '0' && q[i] <= '9')
+		if (q[m] >= '0' && q[m] <= '9')
 		{
-			flag = 1;
-			result *= 10;
-			result += (q[i] - '0');
+			f = 1;
+			y *= 10;
+			y += (q[i] - '0');
 		}
 
-		else if (flag == 1)
-			flag = 2;
+		else if (f == 1)
+			f = 2;
 	}
 
 	if (sign == -1)
-		output = -result;
+		output = -y;
 	else
-		output = result;
+		output = y;
 	return (output);
 }
