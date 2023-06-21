@@ -69,7 +69,7 @@ int _atoi(char *q)
 		{
 			f = 1;
 			y *= 10;
-			y += (q[i] - '0');
+			y += (q[m] - '0');
 		}
 
 		else if (f == 1)
