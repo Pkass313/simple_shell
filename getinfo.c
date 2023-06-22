@@ -15,14 +15,14 @@ void clear_info(info_t *info)
 /**
  * set_info - A function that initializes info_t struct
  * @info: The struct address
- * @op: The argument vector
+ * @av: The argument vector
  */
-void set_info(info_t *info, char **op)
+void set_info(info_t *info, char **av)
 {
 	int b;
 
 	b = 0;
-	info->fname = op[0];
+	info->fname = av[0];
 	if (info->arg)
 	{
 		info->argv = strtow(info->arg, " \t");

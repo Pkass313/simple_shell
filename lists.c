@@ -4,10 +4,10 @@
  * add_node - A function that adds a node at the start of the list
  * @head: The haed
  * @str: str field of node
- * @tmp: The node index
+ * @num: The node index
  * Return: The size of list
  */
-list_t *add_node(list_t **head, const char *str, int tmp)
+list_t *add_node(list_t **head, const char *str, int num)
 {
 	list_t *ptr;
 
@@ -17,7 +17,7 @@ list_t *add_node(list_t **head, const char *str, int tmp)
 	if (!ptr)
 		return (NULL);
 	_memset((void *)ptr, 0, sizeof(list_t));
-	ptr->tmp = tmp;
+	ptr->num = num;
 	if (str)
 	{
 		ptr->str = _strdup(str);
@@ -36,10 +36,10 @@ list_t *add_node(list_t **head, const char *str, int tmp)
  * add_node_end - A function that adds a node to the end of the list
  * @head: The head
  * @str: str field of node
- * @tmp: The node index
+ * @num: The node index
  * Return: The address of the new element otherwise return NULL
  */
-list_t *add_node_end(list_t **head, const char *str, int tmp)
+list_t *add_node_end(list_t **head, const char *str, int num)
 {
 	list_t *new_node, *last;
 
@@ -50,7 +50,7 @@ list_t *add_node_end(list_t **head, const char *str, int tmp)
 	if (!new_node)
 		return (NULL);
 	_memset((void *)new_node, 0, sizeof(list_t));
-	new_node->tmp = tmp;
+	new_node->num = num;
 	if (str)
 	{
 		new_node->str = _strdup(str);

@@ -82,11 +82,11 @@ int _mycd(info_t *info)
  */
 int _myhelp(info_t *info)
 {
-	char **array;
+	char **arg_array;
 
-	array = info->argv;
+	arg_array = info->argv;
 	_puts("help call works. Function not yet implemented \n");
 	if (0)
-		_puts(*array);
+		_puts(*arg_array);
 	return (0);
 }

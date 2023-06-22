@@ -23,55 +23,55 @@ void _eputs(char *str)
 
 /**
 * _eputchar - will write p char to stderr
-* @p: Char to print
+* @c: Char to print
 * Return: On success 1
 * On error, -1 is returned, errno appropriately set
 */
 
-int _eputchar(char p)
+int _eputchar(char c)
 
 {
 	static int m;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (p == BUF_FLUSH || m >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || m >= WRITE_BUF_SIZE)
 
 	{
 		write(2, buf, m);
 		m = 0;
 	}
 
-	if (p != BUF_FLUSH)
+	if (c != BUF_FLUSH)
 
-		buf[m++] = p;
+		buf[m++] = c;
 
 	return (1);
 }
 
 /**
 * _putfd - will write p char to given fd
-* @p: Char to print
+* @c: Char to print
 * @fd:Filedescriptor to write to
 * Return: On success 1.
 * On error, -1 is returned, and errno appropriately set
 */
 
-int _putfd(char p, int fd)
+int _putfd(char c, int fd)
 
 {
 	static int m;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (p == BUF_FLUSH || m >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || m >= WRITE_BUF_SIZE)
 
 	{
 		write(fd, buf, m);
 		m = 0;
 	}
 
-	if (p != BUF_FLUSH)
+	if (c != BUF_FLUSH)
 
-		buf[m++] = p;
+		buf[m++] = c;
 
 	return (1);
 }
