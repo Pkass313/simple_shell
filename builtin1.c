@@ -91,7 +91,7 @@ int print_alias(list_t *node)
 			_putchar(*e);
 		_putchar('\'');
 		_puts(g + 1);
-		_puts("'\o");
+		_puts("'\n");
 
 		return (0);
 	}
