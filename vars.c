@@ -108,36 +108,31 @@ int replace_vars(info_t *info)
 {
 	int r = 0;
 	list_t *node;
+	char *opt;
 
-	for (r = 0; info->argv[r]; r++)
+	while (info->argv[r])
 	{
-		if (info->argv[r][0] != '$' || !info->argv[r][1])
-			continue;
-
+		if (info->argv[r][0] == '$')
+		{
 		if (!_strcmp(info->argv[r], "$?"))
+			opt = convert_number(info->status, 10, 0);
+		else if (!_strcmp(info->argv[r]. "$$"))
+			opt = convert_number(getpid(), 10, 0);
+		else
 		{
-			replace_string(&(info->argv[r]),
-				_strdup(convert_number(info->status, 10, 0)));
-			continue;
-		}
-		if (!_strcmp(info->argv[r], "$$"))
-		{
-			replace_string(&(info->argv[r]),
-				_strdup(convert_number(getpid(), 10, 0)));
-			continue;
-		}
-		node = node_starts_with(info->env, &info->argv[r][1], '=');
-		if (node)
-		{
-			replace_string(&(info->argv[r]),
-				_strdup(_strchr(node->str, '=') + 1));
-			continue;
-		}
-		replace_string(&info->argv[r], _strdup(""));
+			node = node_starts_with(info->env, &(info->argv[r][1], '=');
+					if (node)
+					opt = _strchr(node->opt, '=') + 1;
+					else
+					opt = "";
+					}
+					replace_string(&(info->argv[r]), _strdup(opt));
+					}
+					r++;
+					}
+					return (0);
+					}
 
-	}
-	return (0);
-}
 
 /**
  * replace_string - A function that replaces string
