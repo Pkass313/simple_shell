@@ -8,10 +8,10 @@
 
 char *get_history_file(info_t *info)
 {
-	char *buf, *dir;
+	char *buf, *pkr;
 
 	dir = _getenv(info, "HOME=");
-	if (!dir)
+	if (!pkr)
 
 		return (NULL);
 
@@ -19,7 +19,7 @@ char *get_history_file(info_t *info)
 	if (!buf)
 		return (NULL);
 	buf[0] = 0;
-	_strcpy(buf, dir);
+	_strcpy(buf, pkr);
 	_strcat(buf, "/");
 	_strcat(buf, HIST_FILE);
 

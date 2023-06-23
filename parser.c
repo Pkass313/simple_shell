@@ -11,11 +11,11 @@
 int is_cmd(info_t *info, char *path)
 
 {
-	struct stat st;
+	struct stat sm;
 	(void)info;
-	if (!path || stat(path, &st))
+	if (!path || stat(path, &sm))
 		return (0);
-	if (st.st_mode & S_IFREG)
+	if (sm.sm_mode & S_IFREG)
 	{
 		return (1);
 	}
