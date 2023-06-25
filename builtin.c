@@ -8,15 +8,20 @@
  */
 int _myexit(info_t *info)
 {
-	int exit;
+	int exit_status;
 
+	exit_status = 0;
+	if (strcmp(info->argv[0], "exit") != 0)
+	{
+		return (0);
+	}
 	if (info->argv[1])
 	{
-		exit = _erratoi(info->argv[1]);
-		if (exit == -1)
+		exit_status = _erratoi(info->argv[1]);
+		if (exit_status == -1)
 		{
 			info->status = 2;
-			print_error(info, "Illegal number: ");
+			print_error(info, "Illegal number:");
 			_eputs(info->argv[1]);
 			_eputchar('\n');
 			return (1);
@@ -27,6 +32,7 @@ int _myexit(info_t *info)
 	info->err_num = -1;
 	return (-2);
 }
+
 
 /**
  * _mycd - A function that changes the current directory of the process
