@@ -10,12 +10,12 @@ char *get_history_file(info_t *info)
 {
 	char *buf, *pkr;
 
-	dir = _getenv(info, "HOME=");
+	pkr = _getenv(info, "HOME=");
 	if (!pkr)
 
 		return (NULL);
 
-	buff = malloc(sizeof(char) * (_strlen(dir) + _strlen(HIST_FILE) + 2));
+	buf = malloc(sizeof(char) * (_strlen(pkr) + _strlen(HIST_FILE) + 2));
 	if (!buf)
 		return (NULL);
 	buf[0] = 0;
@@ -51,10 +51,10 @@ int write_history(info_t *info)
 	for (node = info->history; node; node = node->next)
 
 	{
-		_putspk(node->str, pk);
-		_putpk('\n', pk);
+		_putsfd(node->str, pk);
+		_putfd('\n', pk);
 	}
-	_putpk(BUF_FLUSH, pk);
+	_putfd(BUF_FLUSH, pk);
 	close(pk);
 
 	return (1);
