@@ -62,7 +62,7 @@ list_t *add_node_end(list_t **head, const char *str, int num)
 	}
 	if (last)
 	{
-		while (node->next)
+		while (last->next)
 			last = node->next;
 		last->next = new_node;
 	}
@@ -119,7 +119,7 @@ int delete_node_at_index(list_t **head, unsigned int index)
 	{
 		if (r == index)
 		{
-			rev->next = node->next;
+			prev->next = node->next;
 			free(n->str);
 			free(n);
 			return (1);

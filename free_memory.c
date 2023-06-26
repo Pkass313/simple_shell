@@ -7,7 +7,7 @@
  */
 int bfree(void **opt)
 {
-	if (ptr && *opt)
+	if (opt && *opt)
 	{
 		free(*opt);
 		*opt = NULL;

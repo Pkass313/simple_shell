@@ -118,7 +118,7 @@ int _getline(info_t *info, char **opt, size_t *len)
 	ssize_t r = 0, t = 0;
 	char *x = NULL, *new_x = NULL, *u;
 
-	x = opt;
+	x = *opt;
 	if (x && len)
 		t = *len;
 	if (o == l)
