@@ -54,13 +54,13 @@ int _isalpha(int p)
 int _atoi(char *q)
 
 {
-	int m, sign, f, output;
+	int m, sign = 1, f = 0, output;
 
 	unsigned int y = 0;
 
 	sign = 1;
 	f = 0;
-	for (m = 0; q[m] != '\0' && flag != 2; m++)
+	for (m = 0; q[m] != '\0' && f != 2; m++)
 
 	{
 		if (q[m] == '-')

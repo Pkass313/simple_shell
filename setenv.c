@@ -55,7 +55,7 @@ char *_strncat(char *dest, char *src, int o)
 	m = 0;
 	h = 0;
 
-	while (des[m] != '\0')
+	while (dest[m] != '\0')
 
 		m++;
 

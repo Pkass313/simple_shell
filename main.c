@@ -6,7 +6,7 @@
  * @argv: The arguments vector
  * Return: 0 (Success) otherwise return 1
  */
-int main(int argc, char **argv)
+int main(int ac, char **argv)
 {
         info_t info[] = { INFO_INIT };
         int fd;
