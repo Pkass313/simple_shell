@@ -52,9 +52,8 @@ int hsh(info_t *info, char **argv)
  */
 int find_builtin(info_t *info)
 {
-	int k, built_in_ret;
+	int k, built_in_ret = -1;
 
-	built_in_ret = -1;
 	builtin_table builtintbl[] = {
 		{"exit", _myexit},
 		{"env", _myenv},
