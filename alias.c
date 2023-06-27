@@ -19,9 +19,10 @@ void clear_info(info_t *info)
  */
 void set_info(info_t *info, char **av)
 {
-	int b;
+	int o;
 
-	b = 0;
+
+	o = 0;
 	info->fname = av[0];
 	if (info->arg)
 	{
@@ -35,9 +36,9 @@ void set_info(info_t *info, char **av)
 				info->argv[1] = NULL;
 			}
 		}
-		for (b = 0; info->argv && info->argv[b]; b++)
+		for (o = 0; info->argv && info->argv[o]; o++)
 			;
-		info->argc = b;
+		info->argc = o;
 
 		replace_alias(info);
 		replace_vars(info);
@@ -47,14 +48,14 @@ void set_info(info_t *info, char **av)
 /**
  * free_info - A function that frees info_t struct fields
  * @info: The struct address
- * @y: Is true if freeing all fields
+ * @all: Is true if freeing all fields
  */
-void free_info(info_t *info, int y)
+void free_info(info_t *info, int all)
 {
 	ffree(info->argv);
 	info->argv = NULL;
 	info->path = NULL;
-	if (y)
+	if (all)
 	{
 		if (!info->cmd_buf)
 			free(info->arg);

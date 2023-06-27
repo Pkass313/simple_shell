@@ -7,25 +7,25 @@
  */
 int _erratoi(char *s)
 {
-	int d;
-	unsigned long int t = 0;
+	int o;
+	unsigned long int result = 0;
 
-	d = 0;
+	o = 0;
 	if (*s == '+')
 		s++;
-	for (d = 0;  s[d] != '\0'; d++)
+	for (o = 0;  s[o] != '\0'; o++)
 	{
-		if (s[d] >= '0' && s[d] <= '9')
+		if (s[o] >= '0' && s[o] <= '9')
 		{
-			t *= 10;
-			t += (s[d] - '0');
-			if (t > INT_MAX)
+			result *= 10;
+			result += (s[o] - '0');
+			if (result > INT_MAX)
 				return (-1);
 		}
 		else
 			return (-1);
 	}
-	return (t);
+	return (result);
 }
 
 /**
@@ -54,33 +54,33 @@ void print_error(info_t *info, char *estr)
 int print_d(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
-	int k, c;
+	int o, count;
 	unsigned int _abs_, curr;
 
-	c = 0;
+	count = 0;
 	if (fd == STDERR_FILENO)
 		__putchar = _eputchar;
 	if (input < 0)
 	{
 		_abs_ = -input;
 		__putchar('-');
-		c++;
+		count++;
 	}
 	else
 		_abs_ = input;
 	curr = _abs_;
-	for (k = 1000000000; k > 1; k /= 10)
+	for (o = 1000000000; o > 1; o /= 10)
 	{
-		if (_abs_ / k)
+		if (_abs_ / o)
 		{
-			__putchar('0' + curr / k);
-			c++;
+			__putchar('0' + curr / o);
+			count++;
 		}
-		curr %= k;
+		curr %= o;
 	}
 	__putchar('0' + curr);
-	c++;
-	return (c);
+	count++;
+	return (count);
 }
 
 /**
@@ -123,12 +123,12 @@ char *convert_number(long int num, int base, int flags)
  */
 void remove_comments(char *buf)
 {
-	int n;
+	int o;
 
-	for (n = 0; buf[n] != '\0'; n++)
-		if (buf[n] == '#' && (!n || buf[n - 1] == ' '))
+	for (o = 0; buf[o] != '\0'; o++)
+		if (buf[o] == '#' && (!o || buf[o - 1] == ' '))
 		{
-			buf[n] = '\0';
+			buf[o] = '\0';
 			break;
 		}
 }

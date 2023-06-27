@@ -8,16 +8,16 @@
  */
 char *_strcpy(char *dest, char *src)
 {
-	int l = 0;
+	int o = 0;
 
 	if (dest == src || src == 0)
 		return (dest);
-	while (src[l])
+	while (src[o])
 	{
-		dest[l] = src[l];
-		l++;
+		dest[o] = src[o];
+		o++;
 	}
-	dest[l] = 0;
+	dest[o] = 0;
 	return (dest);
 }
 
@@ -28,19 +28,19 @@ char *_strcpy(char *dest, char *src)
  */
 char *_strdup(const char *str)
 {
-	int o = 0;
-	char *tmp;
+	int len = 0;
+	char *ret;
 
 	if (str == NULL)
 		return (NULL);
 	while (*str++)
-		o++;
-	tmp = malloc(sizeof(char) * (o + 1));
-	if (!tmp)
+		len++;
+	ret = malloc(sizeof(char) * (len + 1));
+	if (!ret)
 		return (NULL);
-	for (o++; o--;)
-		tmp[o] = *--str;
-	return (tmp);
+	for (len++; len--;)
+		ret[len] = *--str;
+	return (ret);
 }
 
 /**
@@ -69,15 +69,15 @@ void _puts(char *str)
  */
 int _putchar(char c)
 {
-	static int k;
+	static int o;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || k >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || o >= WRITE_BUF_SIZE)
 	{
-		write(1, buf, k);
-		k = 0;
+		write(1, buf, o);
+		o = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[k++] = c;
+		buf[o++] = c;
 	return (1);
 }

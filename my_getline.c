@@ -9,37 +9,37 @@
  */
 ssize_t input_buf(info_t *info, char **buf, size_t *len)
 {
-	size_t z;
-	size_t h = 0;
+	size_t y;
+	size_t len_m = 0;
 
-	z = 0;
+	y = 0;
 	if (!*len)
 	{
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
-		z = getline(buf, &h, stdin);
+		y = getline(buf, &len_m, stdin);
 #else
-		z = _getline(info, buf, &h);
+		y = _getline(info, buf, &len_m);
 #endif
-		if (z > 0)
+		if (y > 0)
 		{
-			if ((*buf)[z - 1] == '\n')
+			if ((*buf)[y - 1] == '\n')
 			{
-				(*buf)[z - 1] = '\0';
-				z--;
+				(*buf)[y - 1] = '\0';
+				y--;
 			}
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
 			{
-				*len = z;
+				*len = y;
 				info->cmd_buf = buf;
 			}
 		}
 	}
-	return (z);
+	return (y);
 }
 
 /**
@@ -50,37 +50,38 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 ssize_t get_input(info_t *info)
 {
 	static char *buf;
-	static size_t o, t, l;
-	ssize_t b;
-	char **buf_y = &(info->arg), *y;
+	static size_t o, z, len;
+	ssize_t y;
+	char **buf_m = &(info->arg), *m;
 
-	b = 0;
+	y = 0;
 	_putchar(BUF_FLUSH);
-	b = input_buf(info, &buf, &l);
-	if (b == -1)
+	y = input_buf(info, &buf, &len);
+	if (y == -1)
 		return (-1);
-	if (l)
+	if (len)
 	{
-		t = o;
-		y = buf + o;
-		check_chain(info, buf, &t, o, l);
-		while (t < l)
+		z = o;
+		m = buf + o;
+		check_chain(info, buf, &z, o, len);
+		while (z < len)
 		{
-			if (is_chain(info, buf, &t))
+			if (is_chain(info, buf, &z))
 				break;
-			t++;
+			z++;
 		}
-		o = t + 1;
-		if (o >= l)
+		o = z + 1;
+		if (o >= len)
 		{
-			o = l = 0;
+			o = len = 0;
 			info->cmd_buf_type = CMD_NORM;
 		}
-		*buf_y = y;
-		return (_strlen(y));
+		*buf_m = m;
+		return (_strlen(m));
 	}
-	*buf_y = buf;
-	return (b);
+
+	*buf_m = buf;
+	return (y);
 }
 
 /**
@@ -92,55 +93,55 @@ ssize_t get_input(info_t *info)
  */
 ssize_t read_buf(info_t *info, char *buf, size_t *i)
 {
-	ssize_t p;
+	ssize_t m;
 
-	p = 0;
+	m = 0;
 	if (*i)
 		return (0);
-	p = read(info->readfd, buf, READ_BUF_SIZE);
-	if (p >= 0)
-		*i = p;
-	return (p);
+	m = read(info->readfd, buf, READ_BUF_SIZE);
+	if (m >= 0)
+		*i = m;
+	return (m);
 }
 
 /**
  * _getline - A function that gets the next line of input from STDIN
  * @info: The parameter struct
  * @opt: The address of the pointer to buffer
- * @len: The size of preallocated ptr buffer if not NULL
+ * @length: The size of preallocated ptr buffer if not NULL
  * Return: t
  */
-int _getline(info_t *info, char **opt, size_t *len)
+int _getline(info_t *info, char **opt, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
-	static size_t o, l;
-	size_t m;
-	ssize_t r = 0, t = 0;
-	char *x = NULL, *new_x = NULL, *u;
+	static size_t o, len;
+	size_t x;
+	ssize_t y = 0, t = 0;
+	char *m = NULL, *new_m = NULL, *d;
 
-	x = *opt;
-	if (x && len)
+	m = *opt;
+	if (m && len)
 		t = *len;
-	if (o == l)
-		o = l = 0;
-	r = read_buf(info, buf, &l);
-	if (r == -1 || (r == 0 && l == 0))
+	if (o == len)
+		o = len = 0;
+	y = read_buf(info, buf, &len);
+	if (y == -1 || (y == 0 && len == 0))
 		return (-1);
-	u = _strchr(buf + o, '\n');
-	m = u ? 1 + (unsigned int)(u - buf) : l;
-	new_x = _realloc(x, t, t ? t + m : m + 1);
-	if (!new_x)
-		return (x ? free(x), -1 : -1);
+	d = _strchr(buf + o, '\n');
+	x = d ? 1 + (unsigned int)(d - buf) : len;
+	new_m = _realloc(m, t, t ? t + x : x + 1);
+	if (!new_m)
+		return (m ? free(m), -1 : -1);
 	if (t)
-		_strncat(new_x, buf + o, m - o);
+		_strncat(new_m, buf + o, x - o);
 	else
-		_strncpy(new_x, buf + o, m - o + 1);
-	t += m - o;
-	o = m;
-	x = new_x;
+		_strncpy(new_m, buf + o, x - o + 1);
+	t += x - o;
+	o = x;
+	x = new_m;
 	if (len)
 		*len = t;
-	*opt = x;
+	*opt = m;
 	return (t);
 }
 
