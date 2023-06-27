@@ -4,88 +4,88 @@
 **_strncpy - will copy a string
 *@dest: destination string will be copied to
 *@src: the source string
-*@o: amount of chars to copy
+*@n: amount of chars to copy
 *Return: conjugated string
 */
 
-char *_strncpy(char *dest, char *src, int o)
+char *_strncpy(char *dest, char *src, int n)
 
 {
-	int m, h;
-	char *p = dest;
+	int o, z;
+	char *t = dest;
 
-	m = 0;
-	while (src[m] != '\0' && m < o - 1)
+	o = 0;
+	while (src[o] != '\0' && o < n - 1)
 
 	{
-		dest[m] = src[m];
-		m++;
+		dest[o] = src[o];
+		o++;
 	}
 
-	if (m < o)
+	if (o < n)
 
 	{
-		h = m;
-		while (h < o)
+		z = o;
+		while (z < n)
 
 		{
-			dest[h] = '\0';
+			dest[z] = '\0';
 
-			h++;
+			z++;
 		}
 	}
 
-	return (p);
+	return (t);
 }
 
 /**
 **_strncat - conjugates two strings
 *@dest: destination string will be copied to
 *@src: source of the string
-*@o: maximum bytes to be used
+*@n: maximum bytes to be used
 *Return: conjugated string
 */
 
-char *_strncat(char *dest, char *src, int o)
+char *_strncat(char *dest, char *src, int n)
 
 {
-	int m, h;
-	char *p = dest;
+	int o, z;
+	char *t = dest;
 
-	m = 0;
-	h = 0;
+	o = 0;
+	z = 0;
 
-	while (dest[m] != '\0')
+	while (dest[o] != '\0')
 
-		m++;
+		o++;
 
-	while (src[h] != '\0' && h < o)
+	while (src[z] != '\0' && z < n)
 	{
-		dest[m] = src[h];
-		m++;
-		h++;
+		dest[o] = src[z];
+		o++;
+		z++;
 	}
 
-	if (h < o)
+	if (z < n)
 		dest[m] = '\0';
 
-	return (p);
+	return (t);
 }
 
 /**
 **_strchr - locates char in a string
-*@p: string to parse
-*@n: character to search for
-*Return: (p) points to the memory area
+*@s: string to parse
+*@c: character to search for
+*Return: (s) points to the memory area
 */
 
-char *_strchr(char *p, char n)
+char *_strchr(char *s, char c)
 
 {
 	do {
-		if (*p == n)
-			return (p);
-	} while (*p++ != '\0');
+		if (*s == c)
+			return (s);
+	} while (*s++ != '\0');
 
 	return (NULL);
 }
