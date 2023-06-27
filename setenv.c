@@ -67,7 +67,7 @@ char *_strncat(char *dest, char *src, int n)
 	}
 
 	if (z < n)
-		dest[m] = '\0';
+		dest[o] = '\0';
 
 	return (t);
 }
