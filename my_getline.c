@@ -120,8 +120,8 @@ int _getline(info_t *info, char **opt, size_t *length)
 	char *m = NULL, *new_m = NULL, *d;
 
 	m = *opt;
-	if (m && len)
-		t = *len;
+	if (m && length)
+		t = *length;
 	if (o == len)
 		o = len = 0;
 	y = read_buf(info, buf, &len);
@@ -138,9 +138,9 @@ int _getline(info_t *info, char **opt, size_t *length)
 		_strncpy(new_m, buf + o, x - o + 1);
 	t += x - o;
 	o = x;
-	x = new_m;
-	if (len)
-		*len = t;
+	m = new_m;
+	if (length)
+		*length = t;
 	*opt = m;
 	return (t);
 }

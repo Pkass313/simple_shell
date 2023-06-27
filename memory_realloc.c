@@ -22,7 +22,7 @@ char *_memset(char *s, char b, unsigned int n)
  */
 void ffree(char **cc)
 {
-	char *e = cc;
+	char **e = cc;
 
 	if (!cc)
 		return;
