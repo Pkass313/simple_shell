@@ -8,10 +8,10 @@
 
 char *get_history_file(info_t *info)
 {
-	char *buf, *pkr;
+	char *buf, *dir;
 
 	pkr = _getenv(info, "HOME=");
-	if (!pkr)
+	if (!dir)
 
 		return (NULL);
 
@@ -19,7 +19,7 @@ char *get_history_file(info_t *info)
 	if (!buf)
 		return (NULL);
 	buf[0] = 0;
-	_strcpy(buf, pkr);
+	_strcpy(buf, dir);
 	_strcat(buf, "/");
 	_strcat(buf, HIST_FILE);
 
@@ -35,7 +35,7 @@ char *get_history_file(info_t *info)
 int write_history(info_t *info)
 
 {
-	ssize_t pk;
+	ssize_t fd;
 	char *filename = get_history_file(info);
 
 	list_t *node = NULL;
@@ -43,19 +43,19 @@ int write_history(info_t *info)
 	if (!filename)
 
 		return (-1);
-	pk = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
-	if (pk == -1)
+	if (fd == -1)
 		return (-1);
 
 	for (node = info->history; node; node = node->next)
 
 	{
-		_putsfd(node->str, pk);
-		_putfd('\n', pk);
+		_putsfd(node->str, fd);
+		_putfd('\n', fd);
 	}
-	_putfd(BUF_FLUSH, pk);
-	close(pk);
+	_putfd(BUF_FLUSH, fd);
+	close(fd);
 
 	return (1);
 }
@@ -69,7 +69,7 @@ int write_history(info_t *info)
 int read_history(info_t *info)
 
 {
-	int m, last = 0, linecount = 0;
+	int o, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
 	char *buf = NULL, *filename = get_history_file(info);
@@ -92,14 +92,14 @@ int read_history(info_t *info)
 	if (rdlen <= 0)
 		return (free(buf), 0);
 	close(fd);
-	for (m = 0; m < fsize; m++)
-		if (buf[m] == '\n')
+	for (o = 0; o < fsize; o++)
+		if (buf[o] == '\n')
 		{
-			buf[m] = 0;
+			buf[o] = 0;
 			build_history_list(info, buf + last, linecount++);
-			last = m + 1;
+			last = o + 1;
 		}
-	if (last != m)
+	if (last != o)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
@@ -142,14 +142,14 @@ int renumber_history(info_t *info)
 
 {
 list_t *node = info->history;
-	int m = 0;
+	int o = 0;
 
 	while (node)
 
 	{
-		node->num = m++;
+		node->num = o++;
 
 		node = node->next;
 	}
-	return (info->histcount = m);
+	return (info->histcount = o);
 }
