@@ -2,43 +2,43 @@
 
 /**
 * _strlen - length of a string
-* @p: string length to check
+* @s: string length to check
 *
 * Return: length interger of string
 */
 
-int _strlen(char *p)
+int _strlen(char *s)
 {
-	int m = 0;
+	int o = 0;
 
-	if (!p)
+	if (!s)
 		return (0);
-	while (*p++)
-		m++;
-	return (m);
+	while (*s++)
+		o++;
+	return (o);
 }
 
 /**
 * _strcmp - executes comparison of two strings
-* @p1: first string
-* @p2: second string
+* @s1: first string
+* @s2: second string
 *
-* Return: negative if p1 < p2, positive if p1 > p2, zero if p1 == p2
+* Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
 */
 
-int _strcmp(char *p1, char *p2)
+int _strcmp(char *s1, char *s2)
 {
-	while (*p1 && *p2)
+	while (*s1 && *s2)
 	{
-		if (*p1 != *p2)
-			return (*p1 - *p2);
-		p1++;
-		p2++;
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
 	}
-	if (*p1 == *p2)
+	if (*s1 == *s2)
 		return (0);
 	else
-		return (*p1 < *p2 ? -1 : 1);
+		return (*s1 < *s2 ? -1 : 1);
 }
 
 /**
@@ -68,12 +68,12 @@ char *starts_with(const char *haystack, const char *needle)
 
 char *_strcat(char *dest, char *src)
 {
-	char *pms = dest;
+	char *ret = dest;
 
 	while (*dest)
 		dest++;
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (pms);
+	return (ret);
 }
