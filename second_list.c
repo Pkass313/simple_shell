@@ -73,7 +73,7 @@ size_t print_list(const list_t *h)
 		_puts(convert_number(k->num, 10, 0));
 		_putchar(':');
 		_putchar(' ');
-		_puts(h->str ? k->str : "(nil)");
+		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
 		h = h->next;
 		o++;

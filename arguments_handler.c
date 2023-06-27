@@ -78,7 +78,7 @@ int _setenv(info_t *info, char *var, char *value)
 	node = info->env;
 	while (node)
 	{
-	s = starts_with(node->str, var);
+	m = starts_with(node->str, var);
 	if (m && *m == '=')
 	{
 		free(node->str);
