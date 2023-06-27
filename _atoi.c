@@ -3,7 +3,7 @@
 /**
 * interactive - In interactive mode shell returns true
 * @info: address structure
-* Return: in interactive mode 1, if not 0
+* Return: in interactive mode 2, if not 0
 */
 
 int interactive(info_t *info)
@@ -54,22 +54,22 @@ int _isalpha(int p)
 int _atoi(char *q)
 
 {
-	int m, sign = 1, f = 0, output;
+	int o, sign = 1, flag = 0, output;
 
 	unsigned int y = 0;
 
 	sign = 1;
-	f = 0;
-	for (m = 0; q[m] != '\0' && f != 2; m++)
+	flag = 0;
+	for (o = 0; q[o] != '\0' && flag != 2; o++)
 
 	{
-		if (q[m] == '-')
+		if (q[o] == '-')
 			sign *= -1;
-		if (q[m] >= '0' && q[m] <= '9')
+		if (q[o] >= '0' && q[o] <= '9')
 		{
-			f = 1;
+			flag = 1;
 			y *= 10;
-			y += (q[m] - '0');
+			y += (q[o] - '0');
 		}
 
 		else if (f == 1)
