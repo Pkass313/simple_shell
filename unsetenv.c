@@ -9,69 +9,69 @@
 void _eputs(char *str)
 
 {
-	int m = 0;
+	int o = 0;
 
 	if (!str)
 
 		return;
-	while (str[m] != '\0')
+	while (str[o] != '\0')
 	{
-		_eputchar(str[m]);
-		m++;
+		_eputchar(str[o]);
+		o++;
 	}
 }
 
 /**
 * _eputchar - will write p char to stderr
-* @p: Char to print
+* @d: Char to print
 * Return: On success 1
 * On error, -1 is returned, errno appropriately set
 */
 
-int _eputchar(char p)
+int _eputchar(char d)
 
 {
-	static int m;
+	static int o;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (p == BUF_FLUSH || m >= WRITE_BUF_SIZE)
+	if (d == BUF_FLUSH || o >= WRITE_BUF_SIZE)
 
 	{
-		write(2, buf, m);
-		m = 0;
+		write(2, buf, o);
+		o = 0;
 	}
 
-	if (p != BUF_FLUSH)
+	if (d != BUF_FLUSH)
 
-		buf[m++] = p;
+		buf[o++] = d;
 
 	return (1);
 }
 
 /**
 * _putfd - will write p char to given fd
-* @p: Char to print
+* @d: Char to print
 * @fd:Filedescriptor to write to
 * Return: On success 1.
 * On error, -1 is returned, and errno appropriately set
 */
 
-int _putfd(char p, int fd)
+int _putfd(char d, int fd)
 
 {
-	static int m;
+	static int o;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (p == BUF_FLUSH || m >= WRITE_BUF_SIZE)
+	if (d == BUF_FLUSH || o >= WRITE_BUF_SIZE)
 
 	{
-		write(fd, buf, m);
-		m = 0;
+		write(fd, buf, o);
+		o = 0;
 	}
 
-	if (p != BUF_FLUSH)
+	if (d != BUF_FLUSH)
 
-		buf[m++] = p;
+		buf[o++] = d;
 
 	return (1);
 }
@@ -86,7 +86,7 @@ int _putfd(char p, int fd)
 int _putsfd(char *str, int fd)
 
 {
-	int m = 0;
+	int o = 0;
 
 	if (!str)
 
@@ -94,8 +94,8 @@ int _putsfd(char *str, int fd)
 
 	while (*str)
 	{
-		m += _putfd(*str++, fd);
+		o += _putfd(*str++, fd);
 	}
 
-	return (m);
+	return (o);
 }
