@@ -72,8 +72,8 @@ int _atoi(char *q)
 			y += (q[o] - '0');
 		}
 
-		else if (f == 1)
-			f = 2;
+		else if (flag == 1)
+			flag = 2;
 	}
 
 	if (sign == -1)
