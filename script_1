@@ -1,0 +1,97 @@
+#include <stdio.h>
+
+/**
+ * print_numbers - Prints numbers from 1 to 5.
+ */
+void print_numbers(void)
+{
+    int i;
+
+    for (i = 1; i <= 5; i++)
+    {
+        printf("%d\n", i);
+    }
+}
+
+/**
+ * main - Entry point of the program.
+ *
+ * Return: 0 on success.
+ */
+int main(void)
+{
+    print_numbers();
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+Task 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+#define MAX_COMMAND_LENGTH 256
+
+/**
+ * Display the prompt.
+ */
+void display_prompt() {
+    printf("simple_shell$ ");
+}
+
+/**
+ * Execute the command entered by the user.
+ *
+ * @param command The command entered by the user.
+ */
+void execute_command(const char *command) {
+    char path[MAX_COMMAND_LENGTH];
+    snprintf(path, sizeof(path), "/bin/%s", command);
+
+    if (access(path, X_OK) == 0) {
+        pid_t pid = fork();
+
+        if (pid == 0) {
+            // Child process
+            execl(path, command, (char *)NULL);
+            exit(EXIT_SUCCESS);
+        } else if (pid > 0) {
+            // Parent process
+            wait(NULL);
+        } else {
+            // Error forking process
+            perror("fork");
+        }
+    } else {
+        printf("Command not found: %s\n", command);
+    }
+}
+
+int main() {
+    char command[MAX_COMMAND_LENGTH];
+
+    while (1) {
+        display_prompt();
+
+        if (fgets(command, sizeof(command), stdin) == NULL) {
+            // End of file (Ctrl+D) condition
+            printf("\n");
+            break;
+        }
+
+        // Remove trailing newline character
+        command[strcspn(command, "\n")] = '\0';
+
+        execute_command(command);
+    }
+
+    return 0;
+}
