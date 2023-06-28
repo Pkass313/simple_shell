@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#define BUFFER_SIZE 1024
+
+char *my_getline() {
+    static char buffer[BUFFER_SIZE];
+    static size_t buffer_index = 0;
+    static size_t buffer_size = 0;
+
+    char *line = NULL;
+    size_t line_size = 0;
+    ssize_t read_size = 0;
+
+    while (1) {
+        // Refill the buffer if it's empty
+        if (buffer_index >= buffer_size) {
+            buffer_index = 0;
+            buffer_size = read(STDIN_FILENO, buffer, BUFFER_SIZE);
+
+            if (buffer_size <= 0) {
+                if (line != NULL) {
+                    free(line);
+                }
+                return NULL; // End of file or error condition
+            }
+        }
+
+        // Find the newline character in the buffer
+        while (buffer_index < buffer_size && buffer[buffer_index] != '\n') {
+            // Resize the line buffer if necessary
+            if (line_size % BUFFER_SIZE == 0) {
+                line = realloc(line, (line_size + BUFFER_SIZE) * sizeof(char));
+            }
+
+            line[line_size++] = buffer[buffer_index++];
+        }
+
+        // If newline found, terminate the line and return
+        if (buffer_index < buffer_size && buffer[buffer_index] == '\n') {
+            line[line_size] = '\0';
+            buffer_index++;
+            return line;
+        }
+    }
+}
+
+int main() {
+    printf("Enter a line: ");
+    fflush(stdout);
+
+    char *line = my_getline();
+
+    if (line != NULL) {
+        printf("Line entered: %s\n", line);
+        free(line);
+    } else {
+        printf("Error reading input.\n");
+    }
+
+    return 0;
+}
