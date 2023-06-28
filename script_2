@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+
+#define MAX_COMMAND_LENGTH 256
+#define MAX_ARGUMENTS 16
+
+/**
+ * Display the prompt.
+ */
+void display_prompt() {
+    printf("simple_shell$ ");
+}
+
+/**
+ * Execute the command entered by the user.
+ *
+ * @param command The command entered by the user.
+ * @param arguments The arguments for the command.
+ * @param num_arguments The number of arguments.
+ */
+void execute_command(const char *command, char *arguments[], int num_arguments) {
+    char path[MAX_COMMAND_LENGTH];
+    snprintf(path, sizeof(path), "/bin/%s", command);
+
+    if (access(path, X_OK) == 0) {
+        pid_t pid = fork();
+
+        if (pid == 0) {
+            // Child process
+            arguments[num_arguments] = NULL;
+            execv(path, arguments);
+            exit(EXIT_SUCCESS);
+        } else if (pid > 0) {
+            // Parent process
+            wait(NULL);
+        } else {
+            // Error forking process
+            perror("fork");
+        }
+    } else {
+        printf("Command not found: %s\n", command);
+    }
+}
+
+int main() {
+    char command[MAX_COMMAND_LENGTH];
+    char *arguments[MAX_ARGUMENTS];
+
+    while (1) {
+        display_prompt();
+
+        if (fgets(command, sizeof(command), stdin) == NULL) {
+            // End of file (Ctrl+D) condition
+            printf("\n");
+            break;
+        }
+
+        // Remove trailing newline character
+        command[strcspn(command, "\n")] = '\0';
+
+        int num_arguments = 0;
+        char *token = strtok(command, " ");
+
+        while (token != NULL && num_arguments < MAX_ARGUMENTS - 1) {
+            arguments[num_arguments] = token;
+            token = strtok(NULL, " ");
+            num_arguments++;
+        }
+
+        if (num_arguments > 0) {
+            execute_command(arguments[0], arguments, num_arguments);
+        }
+    }
+
+    return 0;
+}
