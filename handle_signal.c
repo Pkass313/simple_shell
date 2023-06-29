@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- *handle_signal- it keeps track is interactive mode
- *@m: the signal number
- *Return: nothing
+ *handle_signal- tracks interactive mode
+ *@m: number to signal
+ *Return: NULL
  */
 
 void handle_signal(int m)
@@ -16,12 +16,12 @@ path.c
 #include "shell.h"
 
 /**
-* find_path - finds the path from the global enviroment
-* Return: NULL if path is not found or path if path is found.
+* find_path - path from the global enviroment locater
+* Return: NULL if path not found, otherwise PATH if path is found.
 */
 char *find_path(void)
 {
-	int x;
+	int k;
 	char **env = environ, *path = NULL;
 
 	while (*env)
@@ -29,10 +29,10 @@ char *find_path(void)
 		if (_strncmp(*env, "PATH=", 5) == 0)
 		{
 			path = *env;
-			while (*path && x < 5)
+			while (*path && k < 5)
 			{
 				path++;
-				x++;
+				k++;
 			}
 			return (path);
 		}
