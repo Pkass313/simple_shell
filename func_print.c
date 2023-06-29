@@ -20,13 +20,13 @@ int _putchar(char c)
 */
 int print_s(char *s)
 {
-	int i = 0;
+	int o = 0;
 
-	while (s[i] != '\0')
+	while (s[o] != '\0')
 	{
-		_putchar(s[i]);
-		i++;
+		_putchar(s[o]);
+		o++;
 	}
 
-	return (i);
+	return (o);
 }
