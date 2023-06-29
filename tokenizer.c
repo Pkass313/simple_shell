@@ -1,18 +1,17 @@
 #include "shell.h"
-
 /**
-* tokenizer - creates tokens from given input
-* @line: to be tokenized
-*
-* Return: array of strings
+* tokenizer -A function that creates tokens from given input
+* @line: The line to be tokenized
+* Return: An array of strings
 */
 char **tokenizer(char *line)
 {
 	char *buf = NULL, *bufp = NULL, *token = NULL, *delim = " :\t\r\n";
 	char **tokens = NULL;
-	int tokensize = 1;
-	size_t index = 0, flag = 0;
+	int tokensize;
+	size_t index = 0, f = 0;
 
+	tokensize = 1;
 	buf = _strdup(line);
 	if (!buf)
 		return (NULL);
@@ -20,13 +19,13 @@ char **tokenizer(char *line)
 
 	while (*bufp)
 	{
-		if (_strchr(delim, *bufp) != NULL && flag == 0)
+		if (_strchr(delim, *bufp) != NULL && f == 0)
 		{
 			tokensize++;
-			flag = 1;
+			f = 1;
 		}
-		else if (_strchr(delim, *bufp) == NULL && flag == 1)
-			flag = 0;
+		else if (_strchr(delim, *bufp) == NULL && f == 1)
+			f = 0;
 		bufp++;
 	}
 	tokens = malloc(sizeof(char *) * (tokensize + 1));

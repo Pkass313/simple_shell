@@ -1,20 +1,23 @@
 #include "shell.h"
 /**
-* main - carries out the read, execute then print output loop
-* @ac: argument count
-* @av: argument vector
-* @envp: environment vector
-*
-* Return: 0
+* main - A function that carries out the read,
+* execute then print output loop
+* @ac: The number of arguments
+* @av: The arguments vector
+* @envp: The environment vector
+* Return: 0 (Success)
 */
 
 int main(int ac, char **av, char *envp[])
 {
 	char *line = NULL, *pathcommand = NULL, *path = NULL;
-	size_t bufsize = 0;
-	ssize_t linesize = 0;
+	size_t bufsize;
+	ssize_t linesize;
 	char **command = NULL, **paths = NULL;
 	(void)envp, (void)av;
+
+	bufsize = 0;
+	linesize = 0;
 	if (ac < 1)
 		return (-1);
 	signal(SIGINT, handle_signal);

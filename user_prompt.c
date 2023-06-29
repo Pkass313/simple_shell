@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
-* prompt_user - prints $ to let user know the program is
-* ready to take their input
-* prints the prompt if the shell is in interactive mode
-* Return: no return
+* prompt_user - A function that prints $ for user to
+* know the program is ready for input
+* Description: If shell is in interactive mode, it prints
+* the prompt
+* Return: Nothing
 */
 void prompt_user(void)
 {
