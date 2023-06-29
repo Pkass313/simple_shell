@@ -13,7 +13,7 @@ void exit_cmd(char **command, char *line)
 	free_buffers(command);
 	exit(0);
 }
-free_function.c
+#include "free_function.c"
 #include "shell.h"
 
 /**
