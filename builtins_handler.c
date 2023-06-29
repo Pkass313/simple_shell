@@ -9,8 +9,8 @@
 */
 int handle_builtin(char **command, char *line)
 {
-	struct builtin builtin = {"env"};
-	struct builtin builtin = {"exit"};
+	struct builtin builtin = {.name = "env"};
+	struct builtin builtin = {.name = "exit", .func = exit_function};
 
 	if (_strcmp(*command, builtin.env) == 0)
 	{
